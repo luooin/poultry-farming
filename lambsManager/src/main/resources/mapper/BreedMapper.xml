@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.BreedMapper">
+
+    <!--查询所有的繁育信息-->
+    <select id="getBreedList" resultType="com.lambs.lambsmanager.pojo.Breed">
+        select id,
+               breedName,
+               breedImg,
+               breedKind,
+               breedCount,
+               breedStartdate,
+               breedTitle,
+               breedContent,
+               figure
+        from breed
+        <where>
+            <if test="userId!=null">
+                and userId=#{userId} order by id desc;
+            </if>
+        </where>
+    </select>
+    
+    <!--新增繁育基地-->
+    <insert id="addBreed" parameterType="com.lambs.lambsmanager.pojo.Breed">
+        insert into breed
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="breedName!=null">
+                breedName,
+            </if>
+            <if test="breedKind!=null">
+                breedKind,
+            </if>
+            <if test="breedCount!=null">
+                breedCount,
+            </if>
+            <if test="breedStartdate!=null">
+                breedStartdate,
+            </if>
+            <if test="breedTitle!=null">
+                breedTitle,
+            </if>
+            <if test="breedContent!=null">
+                breedContent,
+            </if>
+            <if test="figure!=null">
+                figure,
+            </if>
+            <if test="userId!=null">
+                userId,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="breedName!=null">
+                #{breedName},
+            </if>
+            <if test="breedKind!=null">
+                #{breedKind},
+            </if>
+            <if test="breedCount!=null">
+                #{breedCount},
+            </if>
+            <if test="breedStartdate!=null">
+                #{breedStartdate},
+            </if>
+            <if test="breedTitle!=null">
+                #{breedTitle},
+            </if>
+            <if test="breedContent!=null">
+                #{breedContent},
+            </if>
+            <if test="figure!=null">
+                #{figure},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+
+    <!--修改繁育基地-->
+    <update id="updateBreed">
+        update breed
+        <set>
+            <if test="breedName!=null">
+                breedName=#{breedName},
+            </if>
+            <if test="breedImg!=null">
+                breedImg=#{breedImg},
+            </if>
+            <if test="breedKind!=null">
+                breedKind=#{breedKind},
+            </if>
+            <if test="breedCount!=null">
+                breedCount=#{breedCount},
+            </if>
+            <if test="breedStartdate!=null">
+                breedStartdate=#{breedStartdate},
+            </if>
+            <if test="breedTitle!=null">
+                breedTitle=#{breedTitle},
+            </if>
+            <if test="breedContent!=null">
+                breedContent=#{breedContent},
+            </if>
+            <if test="figure!=null">
+                figure=#{figure},
+            </if>
+        </set>
+        <where>
+            <if test="userId!=null">
+               and userId =#{userId}
+            </if>
+            <if test="id!=null">
+                and id =#{id}
+            </if>
+        </where>
+    </update>
+    
+    <!--删除繁育基地-->
+    <delete id="deleteBreed" parameterType="com.lambs.lambsmanager.pojo.Breed">
+        delete from breed
+        <where>
+            <if test="userId!=null">
+                and userId =#{userId}
+            </if>
+            <if test="id!=null">
+                and id =#{id}
+            </if>
+        </where>
+    </delete>
+</mapper>

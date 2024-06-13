@@ -1,0 +1,54 @@
+# 服务端口
+server:
+  port: 8080
+
+# 数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/poultry_farming?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  # 发送邮件
+  mail:
+    username: 1913422684@qq.com
+    password: uxrxokfehprtefjj
+    host: smtp.qq.com
+    port: 587
+  servlet:
+    multipart:
+      max-file-size: 10MB #单文件大小
+      max-request-size: 100MB #多文件大小100MB
+
+# 在线文档配置
+springdoc:
+  swagger-ui:
+    # 配置swagger-ui界面访问路径
+    path: /swagger-ui.html
+    # 包扫描路径
+  packages-to-scan: com.lambs.lambsmanager.controller
+  # 默认开启wend
+  api-docs:
+    enabled: true
+
+# 更改映射文件位置
+mybatis:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  # 打印sql语句到控制台
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 自定义邮件数据和图片存储位置
+labms:
+  from: "1913422684@qq.com"
+  subject: "消息通知"
+  agree: "您好,您在等风养殖管理系统中注册的信息已被通过,请尽快登录,完善个人信息。"
+  regect: "您好,您在等风养殖管理系统中注册的信息已被拒绝,很抱歉为您带来不便,请谅解"
+  ImgLocation: E:\photo\img\ #图片存放路径
+
+#token设置
+config:
+  jwt:
+    secret: jiangliangyi # 加密
+    timeout: 88888 # 超时时间(s)
+    header: token #与前端约定的内容

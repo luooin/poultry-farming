@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.FeedsMapper">
+    <!--查询饲料信息-->
+    <select id="getFeedsList" parameterType="com.lambs.lambsmanager.pojo.Feeds"
+            resultType="com.lambs.lambsmanager.pojo.Feeds">
+        select id,
+        feedName,
+        feedCount,
+        feedPrice,
+        feedOrigin,
+        feedStatus,
+        feedPlace,
+        feedDate,
+        describle
+        from feeds
+        <where>
+            <if test="feedName!=null">
+                and feedName=#{feedName}
+            </if>
+            <if test="feedCount!=null">
+                and feedCount=#{feedCount}
+            </if>
+            <if test="feedPrice!=null">
+                and feedPrice=#{feedPrice}
+            </if>
+            <if test="feedOrigin!=null">
+                and feedOrigin=#{feedOrigin}
+            </if>
+            <if test="feedStatus!=null">
+                and feedStatus=#{feedStatus}
+            </if>
+            <if test="feedPlace!=null">
+                and feedPlace=#{feedPlace}
+            </if>
+            <if test="feedDate!=null">
+                and feedDate=#{feedDate}
+            </if>
+            <if test="describle!=null">
+                and describle=#{describle}
+            </if>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+        </where>
+    </select>
+
+    <!--传入信息删除饲料数据-->
+    <delete id="deleteFeed" parameterType="com.lambs.lambsmanager.pojo.Feeds">
+        delete from feeds
+        <where>
+            <if test="feedName!=null">
+                and feedName=#{feedName}
+            </if>
+            <if test="feedCount!=null">
+                and feedCount=#{feedCount}
+            </if>
+            <if test="feedPrice!=null">
+                and feedPrice=#{feedPrice}
+            </if>
+            <if test="feedOrigin!=null">
+                and feedOrigin=#{feedOrigin}
+            </if>
+            <if test="feedStatus!=null">
+                and feedStatus=#{feedStatus}
+            </if>
+            <if test="feedPlace!=null">
+                and feedPlace=#{feedPlace}
+            </if>
+            <if test="feedDate!=null">
+                and feedDate=#{feedDate}
+            </if>
+            <if test="describle!=null">
+                and describle=#{describle}
+            </if>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+        </where>
+    </delete>
+    
+    <!--传入参数添加饲料信息-->
+    <insert id="addFeed" parameterType="com.lambs.lambsmanager.pojo.Feeds">
+        insert into feeds
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feedName!=null">
+                feedName,
+            </if>
+            <if test="feedCount!=null">
+                feedCount,
+            </if>
+            <if test="feedPrice!=null">
+                feedPrice,
+            </if>
+            <if test="feedOrigin!=null">
+                feedOrigin,
+            </if>
+            <if test="feedStatus!=null">
+                feedStatus,
+            </if>
+            <if test="feedPlace!=null">
+                feedPlace,
+            </if>
+            <if test="feedDate!=null">
+                feedDate,
+            </if>
+            <if test="describle!=null">
+                describle,
+            </if>
+            <if test="userId!=null">
+                userId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feedName!=null">
+                #{feedName},
+            </if>
+            <if test="feedCount!=null">
+                #{feedCount},
+            </if>
+            <if test="feedPrice!=null">
+                #{feedPrice},
+            </if>
+            <if test="feedOrigin!=null">
+                #{feedOrigin},
+            </if>
+            <if test="feedStatus!=null">
+                #{feedStatus},
+            </if>
+            <if test="feedPlace!=null">
+                #{feedPlace},
+            </if>
+            <if test="feedDate!=null">
+                #{feedDate},
+            </if>
+            <if test="describle!=null">
+                #{describle},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+
+    <!--传入参数修改饲料信息-->
+    <update id="updateFeed" parameterType="com.lambs.lambsmanager.pojo.Feeds">
+        update feeds
+        <set>
+            <if test="feedName!=null">
+                feedName=#{feedName},
+            </if>
+            <if test="feedCount!=null">
+                feedCount=#{feedCount},
+            </if>
+            <if test="feedPrice!=null">
+                feedPrice=#{feedPrice},
+            </if>
+            <if test="feedOrigin!=null">
+                feedOrigin=#{feedOrigin},
+            </if>
+            <if test="feedStatus!=null">
+                feedStatus=#{feedStatus},
+            </if>
+            <if test="feedPlace!=null">
+                feedPlace=#{feedPlace},
+            </if>
+            <if test="feedDate!=null">
+                feedDate=#{feedDate},
+            </if>
+            <if test="describle!=null">
+                describle=#{describle},
+            </if>
+        </set>
+        <where>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+        </where>
+    </update>
+</mapper>

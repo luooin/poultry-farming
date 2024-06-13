@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.AnimalMapper">
+    <!--获取畜禽列表-->
+    <select id="getAnimalList" resultMap="getMsg">
+        select id,
+        animalName,
+        animalSex,
+        animalDate,
+        animalStatus,
+        animalWeight,
+        isBreed,
+        feedsId,
+        drugId
+        from animal
+        <where>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+        </where>
+    </select>
+
+    <!--映射器-->
+    <resultMap id="getMsg" type="com.lambs.lambsmanager.pojo.Animal">
+        <id column="id" property="id"/>
+        <result column="animalName" property="animalName"/>
+        <result column="animalSex" property="animalSex"/>
+        <result column="animalDate" property="animalDate"/>
+        <result column="animalStatus" property="animalStatus"/>
+        <result column="animalWeight" property="animalWeight"/>
+        <result column="isBreed" property="isBreed"/>
+        <result column="feedsId" property="feedsId"/>
+        <result column="drugId" property="drugId"/>
+        <!--通过饲料id查询饲料-->
+        <association property="feeds" column="feedsId" select="selectFeeds" javaType="com.lambs.lambsmanager.pojo.Feeds"/>
+        <!--通过药品id查询药品-->
+        <association property="drug" column="drugId" select="selectDrug" javaType="com.lambs.lambsmanager.pojo.Drug"/>
+    </resultMap>
+
+    <!--通过饲料id查询饲料-->
+    <select id="selectFeeds" resultType="com.lambs.lambsmanager.pojo.Feeds">
+        select id,
+               feedName,
+               feedCount,
+               feedPrice,
+               feedOrigin,
+               feedStatus,
+               feedPlace,
+               feedDate,
+               describle
+        from feeds
+        <where>
+            <if test="id!=null">
+               and id=#{feedsId}
+            </if>
+        </where>
+    </select>
+
+    <!--通过药品id查询药品-->
+    <select id="selectDrug" resultType="com.lambs.lambsmanager.pojo.Drug">
+        select id,
+        drugName,
+        drugImg,
+        category,
+        specification,
+        drugCount,
+        batchNumber ,
+        manufactureDate,
+        expirationDate,
+        supplier,
+        buyerCount,
+        buyerPrice,
+        userName
+        from drug
+        <where>
+            <if test="id!=null">
+                and id=#{drugId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增畜禽-->
+    <insert id="addAnimal" parameterType="com.lambs.lambsmanager.pojo.Animal">
+        insert into animal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="animalName!=null">
+                animalName,
+            </if>
+            <if test="animalSex!=null">
+                animalSex,
+            </if>
+            <if test="animalDate!=null">
+                animalDate,
+            </if>
+            <if test="animalStatus!=null">
+                animalStatus,
+            </if>
+            <if test="animalWeight!=null">
+                animalWeight,
+            </if>
+            <if test="isBreed!=null">
+                isBreed,
+            </if>
+            <if test="feedsId!=null">
+                feedsId,
+            </if>
+            <if test="drugId!=null">
+                drugId,
+            </if>
+            <if test="userId!=null">
+                userId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="animalName!=null">
+                #{animalName},
+            </if>
+            <if test="animalSex!=null">
+                #{animalSex},
+            </if>
+            <if test="animalDate!=null">
+                #{animalDate},
+            </if>
+            <if test="animalStatus!=null">
+                #{animalStatus},
+            </if>
+            <if test="animalWeight!=null">
+                #{animalWeight},
+            </if>
+            <if test="isBreed!=null">
+                #{isBreed},
+            </if>
+            <if test="feedsId!=null">
+                #{feedsId},
+            </if>
+            <if test="drugId!=null">
+                #{drugId},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+
+    <!--传入参数修改畜禽-->
+    <update id="updateAnimal" parameterType="com.lambs.lambsmanager.pojo.Animal">
+        update animal
+        <set>
+            <if test="animalName!=null">
+                animalName=#{animalName},
+            </if>
+            <if test="animalSex!=null">
+                animalSex=#{animalSex},
+            </if>
+            <if test="animalDate!=null">
+                animalDate=#{animalDate},
+            </if>
+            <if test="animalStatus!=null">
+                animalStatus=#{animalStatus},
+            </if>
+            <if test="animalWeight!=null">
+                animalWeight=#{animalWeight},
+            </if>
+            <if test="isBreed!=null">
+                isBreed=#{isBreed},
+            </if>
+            <if test="feedsId!=null">
+                feedsId=#{feedsId},
+            </if>
+            <if test="drugId!=null">
+                drugId=#{drugId},
+            </if>
+        </set>
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+        </where>
+    </update>
+
+    <!--传入参数删除畜禽-->
+    <delete id="deleteAnimal" parameterType="com.lambs.lambsmanager.pojo.Animal">
+        delete from animal
+        <where>
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="animalName!=null">
+                and animalName = #{animalName}
+            </if>
+            <if test="animalSex!=null">
+                and animalSex = #{animalSex}
+            </if>
+            <if test="animalDate!=null">
+                and animalDate = #{animalDate}
+            </if>
+            <if test="animalStatus!=null">
+                and animalStatus = #{animalStatus}
+            </if>
+            <if test="animalWeight!=null">
+                and animalWeight = #{animalWeight}
+            </if>
+            <if test="isBreed!=null">
+                and isBreed = #{isBreed}
+            </if>
+            <if test="feedsId!=null">
+                and feedsId = #{feedsId}
+            </if>
+            <if test="drugId!=null">
+                and drugId = #{drugId}
+            </if>
+            <if test="userId!=null">
+                and userId = #{userId}
+            </if>
+        </where>
+    </delete>
+</mapper>

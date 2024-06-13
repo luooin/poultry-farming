@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.SuppliesMapper">
+    <!--获取个人物资列表-->
+    <select id="getSuppliesList" resultType="com.lambs.lambsmanager.pojo.Supplies">
+        select id,
+        suppliesName,
+        suppliesUnit,
+        suppliesCount,
+        suppliesPrice,
+        provider,
+        suppliesAttn,
+        attnPhone,
+        isMar,
+        marCount,
+        suppliesCause,
+        userId
+        from supplies
+        <where>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+            <if test="suppliesName!=null">
+                and suppliesName=#{suppliesName}
+            </if>
+            <if test="suppliesCount!=null">
+                and suppliesCount=#{suppliesCount}
+            </if>
+            <if test="suppliesPrice!=null">
+                and suppliesPrice=#{suppliesPrice}
+            </if>
+            <if test="attnPhone!=null">
+                and attnPhone=#{attnPhone}
+            </if>
+            <if test="provider!=null">
+                and provider=#{provider}
+            </if>
+            <if test="suppliesAttn!=null">
+                and suppliesAttn=#{suppliesAttn}
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <!--传入物资信息删除物资-->
+    <delete id="deleteSupplies" parameterType="com.lambs.lambsmanager.pojo.Supplies">
+        delete from supplies
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="suppliesName!=null">
+                and suppliesName=#{suppliesName}
+            </if>
+        </where>
+    </delete>
+
+    <!--传入物资信息修改物资-->
+    <update id="updateSupplies" parameterType="com.lambs.lambsmanager.pojo.Supplies">
+        update supplies
+        <set>
+            <if test="suppliesName!=null">
+                suppliesName=#{suppliesName},
+            </if>
+            <if test="suppliesUnit!=null">
+                suppliesUnit=#{suppliesUnit},
+            </if>
+            <if test="suppliesCount!=null">
+                suppliesCount=#{suppliesCount},
+            </if>
+            <if test="suppliesPrice!=null">
+                suppliesPrice=#{suppliesPrice},
+            </if>
+            <if test="provider!=null">
+                provider=#{provider},
+            </if>
+            <if test="attnPhone!=null">
+                attnPhone=#{attnPhone},
+            </if>
+            <if test="suppliesAttn!=null ||suppliesAttn!=''">
+                suppliesAttn=#{suppliesAttn},
+            </if>
+            <if test="isMar!=null">
+                isMar=#{isMar},
+            </if>
+            <if test="suppliesCause!=null">
+                suppliesCause=#{suppliesCause},
+            </if>
+            <if test="marCount!=null">
+                marCount=#{marCount},
+            </if>
+        </set>
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+        </where>
+    </update>
+
+    <!--传入物资信息新增物资-->
+    <insert id="addSupplies" parameterType="com.lambs.lambsmanager.pojo.Supplies">
+        <trim prefix="insert into supplies (" suffix=")" suffixOverrides=",">
+            <if test="suppliesName!=null">
+                suppliesName,
+            </if>
+            <if test="suppliesUnit!=null">
+                suppliesUnit,
+            </if>
+            <if test="suppliesCount!=null">
+                suppliesCount,
+            </if>
+            <if test="suppliesPrice!=null">
+                suppliesPrice,
+            </if>
+            <if test="provider!=null">
+                provider,
+            </if>
+            <if test="attnPhone!=null">
+                attnPhone,
+            </if>
+            <if test="suppliesAttn!=null ||suppliesAttn!=''">
+                suppliesAttn,
+            </if>
+            <if test="isMar!=null">
+                isMar,
+            </if>
+            <if test="suppliesCause!=null">
+                suppliesCause,
+            </if>
+            <if test="userId!=null">
+                userId,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="suppliesName!=null">
+                #{suppliesName},
+            </if>
+            <if test="suppliesUnit!=null">
+                #{suppliesUnit},
+            </if>
+            <if test="suppliesCount!=null">
+                #{suppliesCount},
+            </if>
+            <if test="suppliesPrice!=null">
+                #{suppliesPrice},
+            </if>
+            <if test="provider!=null">
+                #{provider},
+            </if>
+            <if test="attnPhone!=null">
+                #{attnPhone},
+            </if>
+            <if test="suppliesAttn!=null ||suppliesAttn!=''">
+                #{suppliesAttn},
+            </if>
+            <if test="isMar!=null">
+                #{isMar},
+            </if>
+            <if test="suppliesCause!=null">
+                #{suppliesCause},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+</mapper>

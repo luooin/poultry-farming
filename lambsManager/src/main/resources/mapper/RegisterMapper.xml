@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.RegisterMapper">
+    <!--(用于登录界面的注册和系统管理的用户注册)通过联系方式查询状态不为0的注册人员信息-->
+    <select id="getRegisterList" resultType="com.lambs.lambsmanager.pojo.Register">
+        select id, username,password, email, phone, status,date
+        from register
+        <where>
+            <if test="phone !=null">
+                phone=#{phone} and status!=0;
+            </if>
+        </where>
+    </select>
+    <!--传入参数修改注册表中的指定用户的状态-->
+    <update id="AlterRegister" parameterType="com.lambs.lambsmanager.pojo.Register">
+        update register
+        set status =#{status}
+        <where>
+            <if test="username!=null">
+                username=#{username}
+            </if>
+            <if test="phone!=null">
+                and phone=#{phone}
+            </if>
+            <if test="email!=null">
+                and email=#{email};
+            </if>
+        </where>
+    </update>
+
+    <!--传入参数申请注册-->
+    <insert id="ApplyRegister" parameterType="com.lambs.lambsmanager.pojo.Register">
+        insert into register
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username!=null">
+                username,
+            </if>
+            <if test="password!=null">
+                password,
+            </if>
+            <if test="email!=null">
+                email,
+            </if>
+            <if test="phone!=null">
+                phone,
+            </if>
+            <if test="date!=null">
+                date,
+            </if>
+        </trim>
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="username!=null">
+                #{username},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="email!=null">
+                #{email},
+            </if>
+            <if test="phone!=null">
+                #{phone},
+            </if>
+            <if test="date!=null">
+                #{date},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

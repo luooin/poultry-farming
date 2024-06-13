@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.MedicalMapper">
+
+    <!--获取器械列表-->
+    <select id="getMedicalList" resultMap="MedicalList">
+        select id,
+        medicalName,
+        medicalType,
+        medicalFirm,
+        medicalCount,
+        medicalPrice,
+        buyTime,
+        isLend,
+        lendUserId,
+        lendTime,
+        lendCount,
+        returnCount,
+        isMar,
+        userId
+        from medical
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+        </where>
+    </select>
+
+    <!--映射器-->
+    <resultMap id="MedicalList" type="com.lambs.lambsmanager.pojo.Medical">
+        <id column="id" property="id"/>
+        <result column="medicalName" property="medicalName"/>
+        <result column="medicalType" property="medicalType"/>
+        <result column="medicalFirm" property="medicalFirm"/>
+        <result column="medicalCount" property="medicalCount"/>
+        <result column="medicalPrice" property="medicalPrice"/>
+        <result column="buyTime" property="buyTime"/>
+        <result column="isLend" property="isLend"/>
+        <result column="lendUserId" property="lendUserId"/>
+        <result column="lendTime" property="lendTime"/>
+        <result column="lendCount" property="lendCount"/>
+        <result column="returnCount" property="returnCount"/>
+        <result column="isMar" property="isMar"/>
+        <result column="userId" property="userId"/>
+        <!--查询用户信息-->
+        <association property="user" column="lendUserId" javaType="com.lambs.lambsmanager.pojo.User" select="getUser"/>
+    </resultMap>
+
+    <!--查询用户信息-->
+    <select id="getUser" resultType="com.lambs.lambsmanager.pojo.User">
+        select id, name, age, gender, phone
+        from user
+        where id = #{lendUserId};
+    </select>
+
+    <!--新增防疫药品信息-->
+    <insert id="addMedical" parameterType="com.lambs.lambsmanager.pojo.Medical">
+        insert into medical
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                id,
+            </if>
+            <if test="medicalName!=null">
+                medicalName,
+            </if>
+            <if test="medicalType!=null">
+                medicalType,
+            </if>
+            <if test="medicalFirm!=null">
+                medicalFirm,
+            </if>
+            <if test="medicalCount!=null">
+                medicalCount,
+            </if>
+            <if test="medicalPrice!=null">
+                medicalPrice,
+            </if>
+            <if test="buyTime!=null">
+                buyTime,
+            </if>
+            <if test="isLend!=null">
+                isLend,
+            </if>
+            <if test="lendUserId!=null">
+                lendUserId,
+            </if>
+            <if test="lendTime!=null">
+                lendTime,
+            </if>
+            <if test="lendCount!=null">
+                lendCount,
+            </if>
+            <if test="returnCount!=null">
+                returnCount,
+            </if>
+            <if test="isMar!=null">
+                isMar,
+            </if>
+            <if test="userId!=null">
+                userId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="medicalName!=null">
+                #{medicalName},
+            </if>
+            <if test="medicalType!=null">
+                #{medicalType},
+            </if>
+            <if test="medicalFirm!=null">
+                #{medicalFirm},
+            </if>
+            <if test="medicalCount!=null">
+                #{medicalCount},
+            </if>
+            <if test="medicalPrice!=null">
+                #{medicalPrice},
+            </if>
+            <if test="buyTime!=null">
+                #{buyTime},
+            </if>
+            <if test="isLend!=null">
+                #{isLend},
+            </if>
+            <if test="lendUserId!=null">
+                #{lendUserId},
+            </if>
+            <if test="lendTime!=null">
+                #{lendTime},
+            </if>
+            <if test="lendCount!=null">
+                #{lendCount},
+            </if>
+            <if test="returnCount!=null">
+                #{returnCount},
+            </if>
+            <if test="isMar!=null">
+                #{isMar},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+    
+    <!--传入参数修改器械信息-->
+    <update id="updateMedical" parameterType="com.lambs.lambsmanager.pojo.Medical">
+        update medical
+        <set>
+            <if test="medicalName!=null">
+                medicalName=#{medicalName},
+            </if>
+            <if test="medicalType!=null">
+                medicalType=#{medicalType},
+            </if>
+            <if test="medicalFirm!=null">
+                medicalFirm=#{medicalFirm},
+            </if>
+            <if test="medicalCount!=null">
+                medicalCount=#{medicalCount},
+            </if>
+            <if test="medicalPrice!=null">
+                medicalPrice=#{medicalPrice},
+            </if>
+            <if test="buyTime!=null">
+                buyTime=#{buyTime},
+            </if>
+            <if test="isLend!=null">
+                isLend=#{isLend},
+            </if>
+            <if test="lendUserId!=null">
+                lendUserId=#{lendUserId},
+            </if>
+            <if test="lendTime!=null">
+                lendTime=#{lendTime},
+            </if>
+            <if test="lendCount!=null">
+                lendCount=#{lendCount},
+            </if>
+            <if test="returnCount!=null">
+                returnCount=#{returnCount},
+            </if>
+            <if test="isMar!=null">
+                isMar=#{isMar},
+            </if>
+        </set>
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+            <if test="medicalName!=null">
+                and medicalName=#{medicalName}
+            </if>
+        </where>
+    </update>
+</mapper>

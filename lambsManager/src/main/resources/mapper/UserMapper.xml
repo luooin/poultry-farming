@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.UserMapper">
+
+    <!--通过传入手机号添加用户-->
+    <insert id="AddUser">
+        insert into user (phone)
+        values (#{phone});
+    </insert>
+
+    <!--查询所有用户的信息-->
+    <select id="getUserList" resultMap="getLoginByPowerByUser">
+        select id, username, powerId, phone, status, userId
+        from login
+    </select>
+
+    <!--映射器-->
+    <resultMap id="getLoginByPowerByUser" type="com.lambs.lambsmanager.pojo.Login">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="powerId" property="powerId"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+        <!--查询用户信息-->
+        <association property="user" column="phone" select="getByUser" javaType="com.lambs.lambsmanager.pojo.User"/>
+        <!--查询权限信息-->
+        <association property="power" column="powerId" select="getByPower"
+                     javaType="com.lambs.lambsmanager.pojo.Power"/>
+    </resultMap>
+
+    <!--通过联系方式查询用户信息-->
+    <select id="getByUser" resultType="com.lambs.lambsmanager.pojo.User">
+        select id, name, age, gender, phone
+        from user
+        <where>
+            <if test="phone!=null">
+                and phone=#{phone}
+            </if>
+        </where>
+    </select>
+
+    <!--通过权限id查询权限-->
+    <select id="getByPower" resultType="com.lambs.lambsmanager.pojo.Power">
+        select id,powerName,powers from power
+        <where>
+            <if test="powerId!=null">
+                id=#{powerId}
+            </if>
+        </where>
+    </select>
+
+
+    <!--通过权限id获取权限信息-->
+    <select id="getPower" resultType="com.lambs.lambsmanager.pojo.Power">
+        select id ,powerName,powers from power
+        <where>
+            <if test="powerId!=null">
+                id=#{powerId}
+            </if>
+        </where>
+    </select>
+
+    <!--通过用户信息查询用户-->
+    <select id="getUserListByUser" resultType="com.lambs.lambsmanager.pojo.User">
+        select id, name, gender, phone
+        from user
+        <where>
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="age!=null">
+                and age=#{age}
+            </if>
+            <if test="gender!=null">
+                and gender=#{gender}
+            </if>
+            <if test="phone!=null">
+                and phone=#{phone}
+            </if>
+        </where>
+    </select>
+
+    <!--传入用户信息修改用户状态,仅采用状态、id、用户名、手机号-->
+    <update id="alterUserStatus" parameterType="com.lambs.lambsmanager.pojo.Login">
+        update login
+        <set>
+            <if test="status!=null">
+                status=#{status}
+            </if>
+        </set>
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="username!=null">
+                and username=#{username}
+            </if>
+            <if test="phone!=null">
+                and phone=#{phone}
+            </if>
+        </where>
+    </update>
+
+    <!--传入对象修改用户user-->
+    <update id="alterUserMsg" parameterType="com.lambs.lambsmanager.pojo.LogUser">
+        update user
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="age!=null">
+                age=#{age},
+            </if>
+            <if test="gender!=null">
+                gender=#{gender},
+            </if>
+            <if test="phone!=null">
+                phone=#{phone},
+            </if>
+        </set>
+        <where>
+            <if test="userId!=null">
+                id=#{userId}
+            </if>
+        </where>
+    </update>
+
+</mapper>

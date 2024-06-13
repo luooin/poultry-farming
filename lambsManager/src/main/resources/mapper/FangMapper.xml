@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.FangMapper">
+
+    <!--添加放养信息-->
+    <insert id="addFang" parameterType="com.lambs.lambsmanager.pojo.Fang">
+        insert into fang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fangName!=null">
+                fangName,
+            </if>
+            <if test="fangKind!=null">
+                fangKind,
+            </if>
+            <if test="fangCount!=null">
+                fangCount,
+            </if>
+            <if test="x!=null">
+                x,
+            </if>
+            <if test="y!=null">
+                y,
+            </if>
+            <if test="userId!=null">
+                userId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fangName!=null">
+                #{fangName},
+            </if>
+            <if test="fangKind!=null">
+                #{fangKind},
+            </if>
+            <if test="fangCount!=null">
+                #{fangCount},
+            </if>
+            <if test="x!=null">
+                #{x},
+            </if>
+            <if test="y!=null">
+                #{y},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+
+    <!--获取所有放养信息-->
+    <select id="getFang" resultType="com.lambs.lambsmanager.pojo.Fang">
+        select id,fangName, fangKind, fangCount, x, y,userId
+        from fang
+        <where>
+            <if test="userId!=null">
+               and userId=#{userId}
+            </if>
+            <if test="fangName!=null">
+                and fangName=#{fangName}
+            </if>
+        </where>
+    </select>
+</mapper>

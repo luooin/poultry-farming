@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.LeftMapper">
+    <!--映射器-->
+    <resultMap id="getLeftMenu" type="com.lambs.lambsmanager.pojo.Lefter">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="path" property="path"/>
+        <result column="icon" property="icon"/>
+        <!--通过id查询子路由-->
+        <collection property="child" select="getLeftChild" column="id" ofType="com.lambs.lambsmanager.pojo.Lefter"/>
+    </resultMap>
+    <!--子路由查询-->
+    <select id="getLeftChild" resultMap="getLeftMenu">
+        select id, title, path, icon
+        from leftpower
+        where parent_id = #{id};
+    </select>
+    <!--查询所有权限-->
+    <select id="getLeft" resultMap="getLeftMenu">
+        select id, title, path, icon
+        from leftpower
+        where parent_id = 0;
+    </select>
+</mapper>

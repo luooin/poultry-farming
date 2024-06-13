@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.DrugMapper">
+
+    <!--查询所有药品信息-->
+    <select id="getDrugList" resultType="com.lambs.lambsmanager.pojo.Drug">
+        select id,
+        drugName,
+        drugImg,
+        category,
+        specification,
+        drugCount,
+        batchNumber,
+        manufactureDate,
+        expirationDate,
+        supplier,
+        buyerCount,
+        buyerPrice,
+        userName,
+        userId
+        from drug
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="drugName!=null">
+                and drugName=#{drugName}
+            </if>
+            <if test="drugImg!=null">
+                and drugImg=#{drugImg}
+            </if>
+            <if test="category!=null">
+                and category=#{category}
+            </if>
+            <if test="specification!=null">
+                and specification=#{specification}
+            </if>
+            <if test="drugCount!=null">
+                and drugCount=#{drugCount}
+            </if>
+            <if test="batchNumber!=null">
+                and batchNumber=#{batchNumber}
+            </if>
+            <if test="manufactureDate!=null">
+                and manufactureDate=#{manufactureDate}
+            </if>
+            <if test="expirationDate!=null">
+                and expirationDate=#{expirationDate}
+            </if>
+            <if test="supplier!=null">
+                and supplier=#{supplier}
+            </if>
+            <if test="buyerCount!=null">
+                and buyerCount=#{buyerCount}
+            </if>
+            <if test="buyerPrice!=null">
+                and buyerPrice=#{buyerPrice}
+            </if>
+            <if test="userName!=null">
+                and userName=#{userName}
+            </if>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+
+        </where>
+    </select>
+
+    <!--传入参数修改药品-->
+    <update id="updateDrug" parameterType="com.lambs.lambsmanager.pojo.Drug">
+        update drug
+        <set>
+            <if test="drugName!=null">
+                drugName=#{drugName},
+            </if>
+            <if test="drugImg!=null">
+                drugImg=#{drugImg},
+            </if>
+            <if test="category!=null">
+                category=#{category},
+            </if>
+            <if test="specification!=null">
+                specification=#{specification},
+            </if>
+            <if test="drugCount!=null">
+                drugCount=#{drugCount},
+            </if>
+            <if test="batchNumber!=null">
+                batchNumber=#{batchNumber},
+            </if>
+            <if test="manufactureDate!=null">
+                manufactureDate=#{manufactureDate},
+            </if>
+            <if test="expirationDate!=null">
+                expirationDate=#{expirationDate},
+            </if>
+            <if test="supplier!=null">
+                supplier=#{supplier},
+            </if>
+            <if test="buyerCount!=null">
+                buyerCount=#{buyerCount},
+            </if>
+            <if test="buyerPrice!=null">
+                buyerPrice=#{buyerPrice},
+            </if>
+            <if test="userName!=null">
+                userName=#{userName},
+            </if>
+        </set>
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+        </where>
+    </update>
+
+    <!--通过药品信息删除药品-->
+    <delete id="deleteDrug" parameterType="com.lambs.lambsmanager.pojo.Drug">
+        delete from drug
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="userId!=null">
+                and userId=#{userId}
+            </if>
+        </where>
+    </delete>
+
+    <!--新增药品-->
+    <insert id="addDrug" parameterType="com.lambs.lambsmanager.pojo.Drug">
+        insert into drug
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                id,
+            </if>
+            <if test="drugName!=null">
+                drugName,
+            </if>
+            <if test="drugImg!=null">
+                drugImg,
+            </if>
+            <if test="category!=null">
+                category,
+            </if>
+            <if test="specification!=null">
+                specification,
+            </if>
+            <if test="drugCount!=null">
+                drugCount,
+            </if>
+            <if test="batchNumber!=null">
+                batchNumber,
+            </if>
+            <if test="manufactureDate!=null">
+                manufactureDate,
+            </if>
+            <if test="expirationDate!=null">
+                expirationDate,
+            </if>
+            <if test="supplier!=null">
+                supplier,
+            </if>
+            <if test="buyerCount!=null">
+                buyerCount,
+            </if>
+            <if test="buyerPrice!=null">
+                buyerPrice,
+            </if>
+            <if test="userName!=null">
+                userName,
+            </if>
+            <if test="userId!=null">
+                userId,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="drugName!=null">
+                #{drugName},
+            </if>
+            <if test="drugImg!=null">
+                #{drugImg},
+            </if>
+            <if test="category!=null">
+                #{category},
+            </if>
+            <if test="specification!=null">
+                #{specification},
+            </if>
+            <if test="drugCount!=null">
+                #{drugCount},
+            </if>
+            <if test="batchNumber!=null">
+                #{batchNumber},
+            </if>
+            <if test="manufactureDate!=null">
+                #{manufactureDate},
+            </if>
+            <if test="expirationDate!=null">
+                #{expirationDate},
+            </if>
+            <if test="supplier!=null">
+                #{supplier},
+            </if>
+            <if test="buyerCount!=null">
+                #{buyerCount},
+            </if>
+            <if test="buyerPrice!=null">
+                #{buyerPrice},
+            </if>
+            <if test="userName!=null">
+                #{userName},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+</mapper>

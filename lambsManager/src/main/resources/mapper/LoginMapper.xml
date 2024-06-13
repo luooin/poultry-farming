@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lambs.lambsmanager.dao.LoginMapper">
+
+    <!--获取用户信息-->
+    <select id="getLogin" resultMap="loginUser">
+        select id, username, powerId,userId, phone, is_default,status
+        from login
+        <where>
+            status = 1
+            <if test="username!=null">
+                and username = #{username}
+            </if>
+            <if test="password!=null">
+                and password = #{password}
+            </if>
+
+        </where>
+    </select>
+
+    <!--映射器-->
+    <resultMap id="loginUser" type="com.lambs.lambsmanager.pojo.Login">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="powerId" property="powerId"/>
+        <result column="phone" property="phone"/>
+        <result column="is_default" property="is_default"/>
+        <result column="status" property="status"/>
+        <!--通过手机号查询用户-->
+        <association property="user" select="getUser" column="phone" javaType="com.lambs.lambsmanager.pojo.User"/>
+        <!--通过权限id查询权限-->
+        <association property="power" select="getPower" column="powerId" javaType="com.lambs.lambsmanager.pojo.Power"/>
+    </resultMap>
+
+    <!--通过手机号查询用户-->
+    <select id="getUser" resultType="com.lambs.lambsmanager.pojo.User">
+        select id, name, age, gender, phone
+        from user
+        where phone = #{phone}
+    </select>
+
+    <!--通过权限id查询权限-->
+    <select id="getPower" resultType="com.lambs.lambsmanager.pojo.Power">
+        select id, powerName, powers
+        from power
+        where id = #{powerId}
+    </select>
+
+    <!--传入注册信息,新增登录用户-->
+    <insert id="AddLoginUser" parameterType="com.lambs.lambsmanager.pojo.Register">
+        insert into login (username,password,phone,userId)
+        <trim prefix="value(" suffix=")" suffixOverrides=",">
+            <if test="register.username!=null">
+                #{register.username},
+            </if>
+            <if test="register.password!=null">
+                #{register.password},
+            </if>
+            <if test="register.phone!=null">
+                #{register.phone},
+            </if>
+            <if test="register.id!=null">
+                #{register.id},
+            </if>
+        </trim>
+    </insert>
+
+    <!--传入参数修改log-->
+    <update id="alterLogMSg" parameterType="com.lambs.lambsmanager.pojo.LogUser">
+        update login
+        <set>
+            <if test="username!=null">
+                username=#{username},
+            </if>
+            <if test="phone!=null">
+                phone=#{phone},
+            </if>
+            <if test="powerId!=null">
+                powerId=#{powerId}
+            </if>
+        </set>
+        <where>
+            <if test="userId!=null">
+                userId=#{userId}
+            </if>
+        </where>
+    </update>
+
+</mapper>
