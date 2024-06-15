@@ -50,6 +50,22 @@
 
 ![image](https://github.com/luocong-shuaige/poultry-farming/assets/85004172/001d0d81-d8ef-4f96-8b7c-10956e6be0dc)
 
++ 私聊管理页面
+![image](https://github.com/luooin/poultry-farming/assets/85004172/8578a162-a6de-461e-896d-36a2f2ebafc7)
+
++ 繁育管理
+![image](https://github.com/luooin/poultry-farming/assets/85004172/6cb70316-0a63-4b1c-b081-8d74bc15c242)
+
++ 放养管理
+![image](https://github.com/luooin/poultry-farming/assets/85004172/9cbff465-bbbe-491e-b6ac-74bcbfef9de3)
+
+
++ 物资管理
+![image](https://github.com/luooin/poultry-farming/assets/85004172/fc560ebe-1695-450b-8a14-c23e9d668f0e)
+
+
++  系统管理
+![image](https://github.com/luooin/poultry-farming/assets/85004172/aceb2a8f-249e-4580-ba5e-f69731ddc70d)
 
 
 + 疫苗管理页面
