@@ -11,8 +11,8 @@ spring:
     password: 123456
   # 发送邮件
   mail:
-    username: xxxxx@qq.com
-    password: xxxxx
+    username: xxx@qq.com # 邮箱
+    password: xxxxxx # 密钥，注意不是密码
     host: smtp.qq.com
     port: 587
   servlet:
@@ -40,7 +40,7 @@ mybatis:
 
 # 自定义邮件数据和图片存储位置
 labms:
-  from: "xxxxx@qq.com"
+  from: "xxxx@qq.com"
   subject: "消息通知"
   agree: "您好,您在等风养殖管理系统中注册的信息已被通过,请尽快登录,完善个人信息。"
   regect: "您好,您在等风养殖管理系统中注册的信息已被拒绝,很抱歉为您带来不便,请谅解"
@@ -49,6 +49,6 @@ labms:
 #token设置
 config:
   jwt:
-    secret: xxxxx # 加密
+    secret: xxxxxxx # 加密
     timeout: 88888 # 超时时间(s)
     header: token #与前端约定的内容
