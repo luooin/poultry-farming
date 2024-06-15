@@ -41,7 +41,8 @@
 
 + 首页页面
 
-![image](https://github.com/luocong-shuaige/poultry-farming/assets/85004172/d2b23b4d-8b28-443a-a9cc-b325c4188f22)
+![image](https://github.com/luooin/poultry-farming/assets/85004172/81dcc63a-2f31-4acc-90f6-864c32ded68b)
+
 
 
 
