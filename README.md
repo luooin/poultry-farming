@@ -50,7 +50,7 @@
 
 ![image](https://github.com/luocong-shuaige/poultry-farming/assets/85004172/001d0d81-d8ef-4f96-8b7c-10956e6be0dc)
 
-+ 私聊管理页面
++ 饲料管理页面
 ![image](https://github.com/luooin/poultry-farming/assets/85004172/8578a162-a6de-461e-896d-36a2f2ebafc7)
 
 + 繁育管理
