@@ -1,4 +1,4 @@
-poultry-farming🎂
+## poultry-farming🎂
 
 基于SpringBoot+Vue的家禽养殖、动物养殖、家禽管理系统
 
@@ -126,8 +126,4 @@ SpringBoot+Vue项目的部署详情可以查看这篇CSDN博客：http://t.csdni
 
 🐧：1902317191
 
-微信：
-
-
-
-![QQ20240730-230522](https://github.com/user-attachments/assets/88e5761c-c372-4608-b65c-a1bd4e27dad0)
+we-chat：coding1902317191
